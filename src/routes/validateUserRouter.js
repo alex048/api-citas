@@ -27,12 +27,13 @@ const router = express.Router();
 // user
 router.post('/login', login.login);
 router.get('/validate/:document',  eventControlllerValidate.getEventValidateUser);
+//correlativo id persona
+router.get('/correlativo',  correlativo.getEventCorrelativo);
+//create user
 router.post('/create', create.createUser);
 router.post('/create/persona',  create.createPersona);
 // PersonMAST
 router.get('/person/:document',  personm.getPersonM);
-//correlativo id persona
-router.get('/correlativo',  correlativo.getEventCorrelativo);
 //Sucursal
 router.get('/sucursal',validarJWT, sucursal.getSucursal);
 //Tipo documento
