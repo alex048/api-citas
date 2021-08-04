@@ -40,8 +40,11 @@ router.get('/sucursal',validarJWT, sucursal.getSucursal);
 router.get('/typedocument',  typeDocument.getTypeDocument);
 //especialidades
 router.get('/specialty/:sucursal',validarJWT,specialty.getSpecialty);
+//Lista medicos
+router.get('/doctors',validarJWT,medico.getListMedico);
 //Medico por especialidad
 router.get('/doctorspecialty/:sucursal/:codigo',validarJWT,medico.getMedicoEspecialidad);
+router.get('/doctorshorario/:periodo/:idmedico',validarJWT,medico.getHorarioMedicoEspecialidad);
 //terminos y condiciones
 router.get('/termsconditions',terminos.getTerminosCondiciones);
 //PORTAL WEB
