@@ -17,11 +17,14 @@ const specialty= require('../controllers/specialty/specialty.controller');
 const medico= require('../controllers/doctor/doctor.controller');
 const correlativo= require('../controllers/auth/correlativo_idpersona/correlativo.controllers');
 const terminos= require('../controllers/privacy_policies/privacy-policies.controller');
+//history
+const history= require('../controllers/quotes/quotes.controllers');
 //PORTAL WEB
 const cie10= require('../portal_controllers/cie10/cie10.Controllers');
 const horario= require('../portal_controllers/horario_medico/horario.controllers');
 const slider= require('../portal_controllers/slider/slider.controllers');
 const mail= require('../portal_controllers/form_contacto/contacto.controllers');
+const { createReclamo}  = require("../portal_controllers/portal_reclamo/portal.controllers");
 const router = express.Router();
 
 // user
@@ -45,8 +48,12 @@ router.get('/doctors',validarJWT,medico.getListMedico);
 //Medico por especialidad
 router.get('/doctorspecialty/:sucursal/:codigo',validarJWT,medico.getMedicoEspecialidad);
 router.get('/doctorshorario/:periodo/:idmedico',validarJWT,medico.getHorarioMedicoEspecialidad);
+router.get('/listdoctorfechahora/:fecha/:hora',validarJWT,medico.getHorarioMedicoFechaHora);
+// lista de citas
+router.get('/historyQuotes/:idPaciente',validarJWT,history.getHistorialCitas);
 //terminos y condiciones
 router.get('/termsconditions',terminos.getTerminosCondiciones);
+
 //PORTAL WEB
 router.get('/cie10',cie10.getCIE10);
 router.get('/horario',horario.getHorarioM);
@@ -67,7 +74,8 @@ router.get('/slider/ambulatorioSurco',slider.getAmbulatorioSurco);
 
 router.post('/mailcontacto',mail.sendMailContacto);
 router.post('/mailcontacto/portalweb',mail.sendMailPortalWeb);
-
+router.post('/mail/validtoken',mail.validateToken);
+router.post('/portal',createReclamo);
 
 module.exports = {
     routes: router

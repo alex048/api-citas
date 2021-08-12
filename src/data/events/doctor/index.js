@@ -41,8 +41,25 @@ const getHorarioMedicoEspecialidad = async(periodo,idmedico) => {
         return error.message;
     }
 }
+
+const getHorarioMedicoFechaHora = async(fecha,hora) => {
+    // console.log(sucursal)
+     try {
+         let pool = await sql.connect(config.sql);
+         const sqlQueries = await utils.loadSqlQueries('doctor');
+         const event = await pool.request()
+                             .input('Fecha', sql.DateTime, fecha)
+                             .input('Hora', sql.DateTime, hora)
+                             .query(sqlQueries.envetGetListDorctorHorario);
+         return event.recordset;
+     } catch (error) {
+         return error.message;
+     }
+ }
+
 module.exports = {
     getListMedicos,
     getMedicoEspecialidad,
-    getHorarioMedicoEspecialidad
+    getHorarioMedicoEspecialidad,
+    getHorarioMedicoFechaHora
 }

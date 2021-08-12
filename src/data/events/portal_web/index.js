@@ -1224,6 +1224,21 @@ const sendMailPortalWeb = async (data) => {
       return error.message;
   }
 }
+const validateToken = async (data) => {
+  try {
+    const body = data;
+    const secret_key = process.env.SECRET_KEY;
+    const token = body.googleresponsetoken;
+    const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
+    fetch(url, { method: "post" })
+      .then((response) => response.json())
+      .then((google_response) => res.json({ google_response }))
+      .catch((error) => res.json({ error }));
+} catch (error) {
+    console.log(error.message);
+}
+ 
+}
 
 module.exports = {
     getCIE10,
@@ -1241,4 +1256,5 @@ quirurgicoSurco,
 ambulatorioSurco,
 sendMailContacto,
 sendMailPortalWeb,
+validateToken,
 }
