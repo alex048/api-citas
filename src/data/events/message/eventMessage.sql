@@ -1,0 +1,1 @@
+SELECT dataTexto FROM MA_MiscelaneosDetalle WHERE AplicacionCodigo='CW' AND CodigoTabla='MENSAJEWEB' AND CodigoElemento='PRG_WEB'

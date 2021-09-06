@@ -1,0 +1,1 @@
+DELETE FROM [dbo].[CW_USUARIO] WHERE  Usuario = @usuario

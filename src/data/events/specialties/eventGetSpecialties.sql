@@ -1,4 +1,7 @@
-SELECT DISTINCT SS_GE_Especialidad.IdEspecialidad as id,Codigo as codigo,Nombre as nombre,Descripcion as descripcion FROM [dbo].[SS_GE_Especialidad] 
-INNER JOIN [dbo].[SS_GE_EspecialidadMedico] ON dbo.SS_GE_Especialidad.IdEspecialidad = dbo.SS_GE_EspecialidadMedico.IdEspecialidad 
-INNER JOIN [dbo].[EmpleadoMast]  ON dbo.EmpleadoMast.Empleado = dbo.SS_GE_EspecialidadMedico.IdMedico
-WHERE SS_GE_Especialidad.Estado=2 AND Sucursal =@sucursal ORDER BY 3
+SELECT DISTINCT ho.idEspecialidad as id,e.Codigo as codigo, e.Nombre as descripcion, e.imagen as icon
+FROM SS_CC_Horario ho, SS_GE_Especialidad e
+WHERE e.Estado=2 AND ho.Estado=2 
+	AND ho.IdEspecialidad = e.IdEspecialidad
+	AND ho.Periodo IN (YEAR(GETDATE())*100 + MONTH(GETDATE()), YEAR(DATEADD(MONTH,+1,GETDATE()))*100 + MONTH(DATEADD(MONTH,+1,GETDATE()))) AND ho.Estado=2
+	AND Sucursal =@sucursal -- Aqui va variable de Sede
+ORDER BY 2

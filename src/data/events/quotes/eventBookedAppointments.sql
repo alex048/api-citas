@@ -1,14 +1,14 @@
-SELECT a.IdCita,
-       a.FechaCita,
+SELECT a.IdCita as idcita,
+       a.FechaCita as fechacita,
 
-  (SELECT x.Nombre
+  (SELECT RTRIM(x.Nombre)
    FROM GE_Sucursal x
    WHERE x.Sucursal = a.Sucursal) AS sucursal,
 
   (SELECT ltrim(rtrim(x.NombreCompleto))
    FROM PersonaMast x
    WHERE x.Persona = b.Medico) AS nombreMedico,
-   
+
 (SELECT ltrim(rtrim(x.Sexo))
    FROM PersonaMast x
    WHERE x.Persona = b.Medico) AS sexo,
@@ -24,7 +24,6 @@ SELECT a.IdCita,
   (SELECT x.Codigo
    FROM SS_GE_Consultorio x
    WHERE x.IdConsultorio = b.IdConsultorio) AS nroConsultorio,
-       a.EstadoDocumento,
 
   (SELECT x.CodigoEstado
    FROM GE_EstadoDocumento x
@@ -33,6 +32,9 @@ SELECT a.IdCita,
 FROM SS_CC_Cita a,
      SS_CC_Horario b
 WHERE b.IdHorario = a.IdHorario
-  AND a.IdPaciente = @idPaciente --Parámetro a enviar código de persona
+  AND a.FechaCita >=  @fechaActual --Parámetro a enviar fecha actual
 
-ORDER BY a.FechaCita DESC
+  AND a.IdPaciente = @IdPaciente --Parámetro a enviar código de persona
+
+  AND a.EstadoDocumento = 2
+ORDER BY a.IdPaciente DESC

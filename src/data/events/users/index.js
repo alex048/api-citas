@@ -55,7 +55,7 @@ const getByDocumentPerson = async(document) => {
 
 const createUser = async (data) => {
     var date = new Date()
-    var fecha_registro= moment(date).format('YYYY-MM-DD HH:mm:ss')
+    var fechaRegistro= moment(date).format('YYYY-MM-DD HH:mm:ss')
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('users');
@@ -74,7 +74,18 @@ const createUser = async (data) => {
         return error.message;
     }
 };
-
+const deleteUser = async (usuario) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const deleteEvent = await pool.request()
+                            .input('usuario', sql.VarChar, usuario)
+                            .query(sqlQueries.eventDeleteUser);
+        return deleteEvent.recordset;
+    } catch (error) {
+        return error.message;
+    }
+}
 const createPersona = async (data) => {
     // var date = new Date()
    // var fecha_registro= moment(date).format('YYYY-MM-DD HH:mm:ss')
@@ -108,11 +119,30 @@ const createPersona = async (data) => {
     }
 };
 
+const updatePersona = async(data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const event = await pool.request()
+                            .input('celular', sql.NVarChar, data.celular)
+                            .input('telefono', sql.NVarChar, data.telefono)
+                            .input('correo', sql.NVarChar, data.correo)
+                            .input('direccion', sql.NVarChar, data.direccion)
+                            .input('Persona', sql.NVarChar, data.Persona)
+                            .query(sqlQueries.eventUpdatePersona);
+        return event.recordset;
+    } catch (error) {
+        return error.message;
+    }
+};
+
 module.exports = {
     getValidateUser,
     login,
     createUser,
+    deleteUser,
     createPersona,
     getCorrelativoIDPersona,
-    getByDocumentPerson
+    getByDocumentPerson,
+    updatePersona
 }

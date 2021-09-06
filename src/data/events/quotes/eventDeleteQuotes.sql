@@ -1,0 +1,1 @@
+exec SP_CMS_CITAS_ANULA @idCita, @usuario
