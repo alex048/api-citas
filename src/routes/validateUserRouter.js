@@ -32,6 +32,7 @@ const cie10= require('../portal_controllers/cie10/cie10.Controllers');
 const horario= require('../portal_controllers/horario_medico/horario.controllers');
 const slider= require('../portal_controllers/slider/slider.controllers');
 const mail= require('../portal_controllers/form_contacto/contacto.controllers');
+const birthay= require('../portal_controllers/birthay/birthay.comtrollers');
 
 const { createReclamo}  = require("../portal_controllers/portal_reclamo/portal.controllers");
 const router = express.Router();
@@ -70,9 +71,11 @@ router.post('/appointment',validarJWT,citas.registerAppointment);
 router.post('/canceldate',validarJWT,citas.calcelDate);
 //terminos y condiciones
 router.get('/termsconditions',terminos.getTerminosCondiciones);
-// passowrd and recover
-router.post('/sendmail',mailpass.sendMailPassword);
-router.post('/sendmailcitas',mailpass.sendMailCitas);
+// mail 
+router.post('/mailcitas',mailpass.sendMailCitas);
+router.post('/mailnewacount',mailpass.sendNewAcountUserPassword);
+router.post('/maillinkvalidate',mailpass.sendValidateMailLinkPassword);
+router.post('/mailchangepassword',mailpass.sendMailPasswordChangeNew);
 // Message
 router.get('/message',message.getMessage);
 // Message
@@ -99,6 +102,7 @@ router.get('/slider/ambulatorioSurco',slider.getAmbulatorioSurco);
 router.post('/mailcontacto',mail.sendMailContacto);
 router.post('/mailcontacto/portalweb',mail.sendMailPortalWeb);
 router.post('/mail/validtoken',mail.validateToken);
+router.post('/birthday',birthay.getBirthay);
 router.post('/portal',createReclamo);
 
 module.exports = {

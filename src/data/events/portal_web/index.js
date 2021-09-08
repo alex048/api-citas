@@ -1240,6 +1240,43 @@ const validateToken = async (data) => {
  
 }
 
+const getBirthay = async (data) => {
+  try {
+      var sqlQuery = `SELECT 
+      EmpleadoMast.Empleado AS id_colaborador,
+      CONCAT(RTRIM(PersonaMast.Nombres),' ',RTRIM(PersonaMast.ApellidoPaterno),' ',RTRIM(PersonaMast.ApellidoMaterno)) AS nombre,
+      v_area = HR_Departamento.Descripcion,
+      EmpleadoMast.CorreoInterno AS v_correo,
+      COD_SUCURSAL = (CASE RTRIM(EmpleadoMast.Sucursal) WHEN '0001' THEN 'Lima' WHEN '0002' THEN 'Chorrillos' WHEN '0004' THEN 'Surco' END), 
+      v_cargo =  HR_PuestoEmpresa.Descripcion,
+      d_nacimiento = FORMAT(PersonaMast.FechaNacimiento, 'dd/MM'),
+      v_genero = (CASE PersonaMast.Sexo WHEN 'M' THEN 'MA' WHEN 'F' THEN 'FE' END),
+      estado = (CASE EmpleadoMast.EstadoEmpleado WHEN 2 THEN 'CE' WHEN 0 THEN 'AC' END)
+      FROM EmpleadoMast 
+      LEFT JOIN PersonaMast ON EmpleadoMast.Empleado = PersonaMast.Persona
+      LEFT JOIN HR_Departamento ON EmpleadoMast.DepartamentoOperacional = HR_Departamento.Departamento
+      LEFT JOIN HR_PuestoEmpresa ON EmpleadoMast.CodigoCargo = HR_PuestoEmpresa.CodigoPuesto
+      LEFT JOIN AC_CostCenterMst ON EmpleadoMast.CentroCostos = AC_CostCenterMst.CostCenter 
+      LEFT JOIN MA_MiscelaneosDetalle ON PersonaMast.TipoDocumento = MA_MiscelaneosDetalle.CodigoElemento
+      WHERE 
+      IsNull(EmpleadoMast.TipoPlanilla, 'OT') <> 'OT'
+      AND EmpleadoMast.EstadoEmpleado='0'
+      AND MA_MiscelaneosDetalle.CodigoTabla = 'TIPODOCI'
+      AND RTRIM(PersonaMast.Nombres) LIKE '%${body.nombres}%'
+     `;
+      if (body.type === 1) {
+      sqlQuery += `  AND FORMAT(PersonaMast.FechaNacimiento, 'dd/MM') = '${body.dia_mes}' `;
+      } else {
+      sqlQuery += `   AND FORMAT(PersonaMast.FechaNacimiento, 'MM') = '${body.dia_mes}'  `;
+      }
+      let pool = await sql.connect(config.sql);
+      const insertEvent = await pool.request().query(sqlQuery);
+      return insertEvent.recordset;
+  } catch (error) {
+      return error.message;
+  }
+}
+
 module.exports = {
     getCIE10,
     getHoraio,
@@ -1257,4 +1294,5 @@ ambulatorioSurco,
 sendMailContacto,
 sendMailPortalWeb,
 validateToken,
+getBirthay
 }
