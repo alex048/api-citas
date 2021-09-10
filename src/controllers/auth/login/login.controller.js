@@ -1,6 +1,7 @@
 ﻿'use strict';
 const bcrypt = require('bcryptjs');
 const eventData = require('../../../data/events/users');
+const descifraPasswordData = require('../../../data/events/password_crypto');
 const { generarJWT } = require('../../../../helpers/jwt');
 
 const login = async (req, res, next) => {
@@ -16,8 +17,16 @@ const login = async (req, res, next) => {
             });
         }
           // Verificar contraseña
-        const validPassword = bcrypt.compareSync( password, usuario[0].Clave );
+        /*const validPassword = bcrypt.compareSync( password, usuario[0].Clave );
         if ( !validPassword ) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Contraseña no válida'
+            });
+        }*/
+        // descifra contraseña
+        const validPassword = await descifraPasswordData.decryptPassword(username,password)
+        if ( !JSON.parse(validPassword.status) ) {
             return res.status(400).json({
                 ok: false,
                 msg: 'Contraseña no válida'

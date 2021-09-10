@@ -1,6 +1,7 @@
 'use strict';
 const bcrypt = require('bcryptjs');
 const eventData = require('../../../data/events/users');
+const eventPassword = require('../../../data/events/password_crypto');
 const createUser = async (req, res, next) => {
   const { username, password } = req.body;
   try {
@@ -12,11 +13,11 @@ const createUser = async (req, res, next) => {
           msg: 'El usuario ya está registrado'
       });
     }
-
     // Encriptar contraseña
-    const salt = bcrypt.genSaltSync();
-    req.body.password = bcrypt.hashSync( password, salt );
-
+    // const salt = bcrypt.genSaltSync();
+    // req.body.password = bcrypt.hashSync( password, salt );
+    const result = await eventPassword.cryptoPassword(password);
+    req.body.password = result.password;
     const data = req.body;
     const insert = await eventData.createUser(data);
     console.log('register: ',insert.length);
