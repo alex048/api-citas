@@ -75,7 +75,7 @@ router.get('/termsconditions',terminos.getTerminosCondiciones);
 router.post('/mailcitas',mailpass.sendMailCitas);
 router.post('/mailnewacount',mailpass.sendNewAcountUserPassword);
 router.post('/maillinkvalidate',mailpass.sendValidateMailLinkPassword);
-router.post('/mailchangepassword',mailpass.sendMailPasswordChangeNew);
+router.post('/maillinkvalidate',mailpass.sendMailPasswordChangeNew);
 // Message
 router.get('/message',message.getMessage);
 // Message

@@ -63,9 +63,9 @@ const createUser = async (data) => {
                             .input('username', sql.NVarChar(20), data.username)
                             .input('names', sql.NVarChar(100), data.names)
                             .input('password', sql.NVarChar(200), data.password)
-                            .input('sqllogin', sql.NVarChar(20), data.sqllogin)
-                            .input('state', sql.NChar(1), data.state)
-                            .input('registerUser', sql.NVarChar(25), data.registerUser)
+                            .input('sqllogin', sql.NVarChar(20), 'CW')
+                            .input('state', sql.NChar(1), 'A')
+                            .input('registerUser', sql.NVarChar(25), data.username)
                             .input('person', sql.Int, data.person)
                             .input('FechaRegistro', sql.DateTime, fechaRegistro)
                             .query(sqlQueries.eventRegisterUser);
@@ -94,7 +94,7 @@ const createPersona = async (data) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertEvent = await pool.request()
                             .input('Persona', sql.Int, data.persona)
-                            .input('Origen', sql.NChar(4), data.origen)
+                            .input('Origen', sql.NChar(4), 'Lima')
                             .input('ApellidoPaterno', sql.NVarChar(50), data.apellidoPaterno)
                             .input('ApellidoMaterno', sql.NVarChar(50), data.apellidoMaterno)
                             .input('Nombres', sql.NVarChar(50), data.nombres)
@@ -102,15 +102,15 @@ const createPersona = async (data) => {
                             .input('Busqueda', sql.NVarChar(150), data.busqueda)
                             .input('TipoDocumento', sql.NChar(1), data.tipoDocumento)
                             .input('Documento', sql.NChar(20), data.documento)
-                            .input('TipoPersona', sql.NChar(1), data.tipoPersona)
+                            .input('TipoPersona', sql.NChar(1), 'N')
                             .input('FechaNacimiento', sql.DateTime, data.fechaNacimiento)
                             .input('Sexo', sql.NChar(1), data.sexo)
-                            .input('Nacionalidad', sql.NVarChar(20), data.nacionalidad)
+                            .input('Nacionalidad', sql.NVarChar(20), 'PER')
                             .input('Telefono', sql.NVarChar(30), data.telefono)
                             .input('CorreoElectronico', sql.NVarChar(150), data.correoElectronico)
-                            .input('Estado', sql.NChar(1), data.estado)
+                            .input('Estado', sql.NChar(1), 'A')
                             .input('Celular', sql.NVarChar(15), data.celular)
-                            .input('Pais', sql.NChar(4), data.pais)
+                            .input('Pais', sql.NChar(4), 'PER')
                             .query(sqlQueries.eventRegisterMPerson);
         return insertEvent.rowsAffected;
     } catch (error) {

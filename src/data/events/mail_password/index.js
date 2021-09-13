@@ -1182,7 +1182,7 @@ const sendNewAcountUserPassword = async (data) => {
     var mailOptions = {
       from: `'Clínica Maison de Santé' <webmaster@clubdelasalud.pe>`,
       to: `${data.mail}`,
-      subject: `${data.subject}`,
+      subject: `Registro de usuario`,
       html: `
       <!DOCTYPE html>
       <html
@@ -1425,7 +1425,7 @@ const sendNewAcountUserPassword = async (data) => {
                                               ${data.paciente}, este correo es para
                                               notificarle la creación de una cuenta en
                                               la Aplicación de Citas . Su código de
-                                              usuario es ${documento} y su contraseña:
+                                              usuario es ${data.documento} y su contraseña:
                                               ${data.password}
                                             </p>
                                           </div>
