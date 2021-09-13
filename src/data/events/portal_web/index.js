@@ -1262,12 +1262,12 @@ const getBirthay = async (data) => {
       IsNull(EmpleadoMast.TipoPlanilla, 'OT') <> 'OT'
       AND EmpleadoMast.EstadoEmpleado='0'
       AND MA_MiscelaneosDetalle.CodigoTabla = 'TIPODOCI'
-      AND RTRIM(PersonaMast.Nombres) LIKE '%${body.nombres}%'
+      AND RTRIM(PersonaMast.Nombres) LIKE '%${data.nombres}%'
      `;
-      if (body.type === 1) {
-      sqlQuery += `  AND FORMAT(PersonaMast.FechaNacimiento, 'dd/MM') = '${body.dia_mes}' `;
+      if (data.type === 1) {
+      sqlQuery += `  AND FORMAT(PersonaMast.FechaNacimiento, 'dd/MM') = '${data.dia_mes}' `;
       } else {
-      sqlQuery += `   AND FORMAT(PersonaMast.FechaNacimiento, 'MM') = '${body.dia_mes}'  `;
+      sqlQuery += `   AND FORMAT(PersonaMast.FechaNacimiento, 'MM') = '${data.dia_mes}'  `;
       }
       let pool = await sql.connect(config.sql);
       const insertEvent = await pool.request().query(sqlQuery);
