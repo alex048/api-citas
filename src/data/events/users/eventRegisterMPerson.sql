@@ -16,8 +16,7 @@ INSERT INTO  [dbo].[PersonaMast] (
     [CorreoElectronico],
     [Estado],
     [Celular],
-    [Pais]
-    [DocumentoIdentidad] )
+    [Pais] )
 VALUES (
     @Persona,
     @Origen,
@@ -36,6 +35,6 @@ VALUES (
     @CorreoElectronico,
     @Estado,
     @Celular,
-    @Pais,
-    @DocumentoIdentidad
+    @Pais
 )
+

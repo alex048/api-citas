@@ -26,7 +26,7 @@ const login = async (req, res, next) => {
         }*/
         // descifra contraseña
         const validPassword = await descifraPasswordData.decryptPassword(username,password)
-        if ( !JSON.parse(validPassword.status) ) {
+        if (validPassword.status === 'False' ) {
             return res.status(400).json({
                 ok: false,
                 msg: 'Contraseña no válida'

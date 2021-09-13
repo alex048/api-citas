@@ -111,9 +111,8 @@ const createPersona = async (data) => {
                             .input('Estado', sql.NChar(1), data.estado)
                             .input('Celular', sql.NVarChar(15), data.celular)
                             .input('Pais', sql.NChar(4), data.pais)
-                            .input('DocumentoIdentidad', sql.NChar(20), data.documentoIdentidad)
                             .query(sqlQueries.eventRegisterMPerson);
-        return insertEvent.recordset;
+        return insertEvent.rowsAffected;
     } catch (error) {
         return error.message;
     }

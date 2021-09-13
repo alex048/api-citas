@@ -20,7 +20,6 @@ const createUser = async (req, res, next) => {
     req.body.password = result.password;
     const data = req.body;
     const insert = await eventData.createUser(data);
-    console.log('register: ',insert.length);
     if(insert.length > 0){
       return res.json({
         ok: true,
@@ -45,7 +44,18 @@ const createPersona = async (req, res, next) => {
   try {
       const data = req.body;
       const insert = await eventData.createPersona(data);
-      res.send(insert);
+      if(insert.length > 0){
+        return res.json({
+          ok: true,
+          msg: 'Persona registrado con exito',
+          insert
+      });}else{
+        return res.json({
+          ok: false,
+          msg: 'Error al registrar',
+          insert
+      });
+      }
   } catch (error) {
       res.status(400).send(error.message);
   }
