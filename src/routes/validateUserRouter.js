@@ -48,8 +48,10 @@ router.put('/correlativo',  correlativo.updateCorrelativo);
 router.post('/create', create.createUser);
 router.post('/create/persona',  create.createPersona);
 router.delete('/user/:usuario', deleteUser.deleteUser);
+
 router.post('/generateToken', token.generateToken);
 router.get('/decode/:tokenvalidate', token.decifrarToken);
+router.get('/validatechangepassword/:persona', token.getValidateChangePassword);
 // PersonMAST
 router.get('/person/:document',  personm.getPersonM);
 router.put('/person',validarJWT,  personm.updatePersona);

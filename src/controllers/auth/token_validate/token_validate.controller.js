@@ -43,7 +43,20 @@ const decifrarToken = async (req, res, next) => {
         });
     }
 }
+
+const getValidateChangePassword = async (req, res, next) => {
+    const persona = req.params.persona;
+    try {
+        const data = req.body;
+        const event = await eventData.validateChangePassword(persona);
+        res.send(event);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
 module.exports = {
     generateToken,
-    decifrarToken
+    decifrarToken,
+    getValidateChangePassword
 }
