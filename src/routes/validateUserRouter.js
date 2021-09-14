@@ -42,6 +42,7 @@ router.post('/login', login.login);
 router.get('/validate/:document',  eventControlllerValidate.getEventValidateUser);
 //correlativo id persona
 router.get('/correlativo',  correlativo.getEventCorrelativo);
+router.put('/correlativo',  correlativo.updateCorrelativo);
 //create user
 router.post('/create', create.createUser);
 router.post('/create/persona',  create.createPersona);
