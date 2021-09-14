@@ -8,4 +8,5 @@ Telefono as telefono,
 Celular as celular,
 CorreoElectronico as correoElectronico,
 FechaNacimiento as fechaNacimiento ,
+Direccion as direccion,
 Sexo as sexo FROM PersonaMast  WHERE Documento =@documento
