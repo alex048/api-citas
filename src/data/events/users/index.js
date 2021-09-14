@@ -40,6 +40,24 @@ const getCorrelativoIDPersona = async () => {
         console.log(error.message);
     }
 };
+
+const updateCorrelativo = async (data) => {
+    var date = new Date()
+    var fechaRegistro= moment(date).format('YYYY-MM-DD HH:mm:ss')
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const insertEvent = await pool.request()
+                            .input('persona', sql.Int, data.persona)
+                            .input('usuario', sql.NVarChar, data.usuario)
+                            .input('fechahoraregistro',sql.DateTime, fechaRegistro)
+                            .query(sqlQueries.eventUpdateCorrelativo);
+        return insertEvent.recordset;
+    } catch (error) {
+        return error.message;
+    }
+};
+
 const getByDocumentPerson = async(document) => {
     try {
         let pool = await sql.connect(config.sql);
@@ -154,6 +172,7 @@ module.exports = {
     deleteUser,
     createPersona,
     getCorrelativoIDPersona,
+    updateCorrelativo,
     getByDocumentPerson,
     updatePersona,
     enableChangePassword
