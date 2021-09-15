@@ -7,6 +7,7 @@ const eventControlllerValidate = require('../controllers/auth/validate_users/val
 const login = require('../controllers/auth/login/login.controller');
 const create = require('../controllers/auth/register/register.controller');
 const deleteUser = require('../controllers/auth/delete/delete_user.controllers');
+const token = require('../controllers/auth/token_validate/token_validate.controller');
 //Sucursal
 const sucursal = require('../controllers/branch_office/branch-office.controller');
 //Tipo Documento
@@ -47,6 +48,10 @@ router.put('/correlativo',  correlativo.updateCorrelativo);
 router.post('/create', create.createUser);
 router.post('/create/persona',  create.createPersona);
 router.delete('/user/:usuario', deleteUser.deleteUser);
+
+router.post('/generateToken', token.generateToken);
+router.get('/decode/:tokenvalidate', token.decifrarToken);
+router.get('/validatechangepassword/:persona', token.getValidateChangePassword);
 // PersonMAST
 router.get('/person/:document',  personm.getPersonM);
 router.put('/person',validarJWT,  personm.updatePersona);
