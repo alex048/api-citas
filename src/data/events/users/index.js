@@ -145,7 +145,7 @@ const updatePersona = async(data) => {
                             .input('telefono', sql.NVarChar, data.telefono)
                             .input('correo', sql.NVarChar, data.correo)
                             .input('direccion', sql.NVarChar, data.direccion)
-                            .input('Persona', sql.NVarChar, data.Persona)
+                            .input('persona', sql.Int, data.persona)
                             .query(sqlQueries.eventUpdatePersona);
         return event.recordset;
     } catch (error) {

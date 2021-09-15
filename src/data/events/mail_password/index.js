@@ -1806,7 +1806,7 @@ const sendValidateMailLinkPassword = async (data) => {
     var mailOptions = {
       from: `'Clínica Maison de Santé' <webmaster@clubdelasalud.pe>`,
       to: `${data.mail}`,
-      subject: `${data.subject}`,
+      subject: `Restablecer Contraseña`,
       html: `
       <!DOCTYPE html>
       <html
@@ -2015,7 +2015,7 @@ const sendValidateMailLinkPassword = async (data) => {
                                                     ><span style="font-weight: bold"
                                                       ><a
                                                         href="http://190.116.43.122:8080/CitasWeb/#/cambio/@RECUPERAR_LINK"
-                                                        >${data.NOMBRE_SYS}</a
+                                                        >${data.sys}</a
                                                       ></span
                                                     ></span
                                                   ></span

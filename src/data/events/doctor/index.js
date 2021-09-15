@@ -37,7 +37,7 @@ const getHorarioMedicoEspecialidad = async(data) => {
                             .input('idespecialidad', sql.Int, data.idespecialidad)
                             .input('fecha', sql.VarChar, data.fecha)
                             .input('sucursal', sql.VarChar, data.sucursal)
-                            .query("exec SP_CMS_CITAS_LISTA_HORARIOS @idmedico, @idespecialidad, @fecha, '0001', @sucursal");
+                            .query(sqlQueries.eventHorarioDoctor);
         return event.recordset;
     } catch (error) {
         return error.message;
