@@ -2004,9 +2004,8 @@ const sendValidateMailLinkPassword = async (data) => {
                                               ><span style="font-style: italic"
                                                 ><span style="font-weight: bold"
                                                   >${data.paciente}</span
-                                                >, este correo es para indicarle que
-                                                ingrese al link de recuperación de
-                                                contraseña la cual es:
+                                                >, Para confirmar la recuperación de contraseña , haz clic en el enlace para la validación
+                                                Enlace de acceso :
                                               </span></span
                                             ><span style="color: rgb(0, 51, 51)"
                                               ><span style="font-style: italic"
@@ -2014,7 +2013,7 @@ const sendValidateMailLinkPassword = async (data) => {
                                                   ><span style="font-style: italic"
                                                     ><span style="font-weight: bold"
                                                       ><a
-                                                        href="http://190.116.43.122:8080/CitasWeb/#/cambio/@RECUPERAR_LINK"
+                                                        href="${data.url}"
                                                         >${data.sys}</a
                                                       ></span
                                                     ></span

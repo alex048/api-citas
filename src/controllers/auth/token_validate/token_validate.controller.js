@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt_decode = require('jwt-decode');
+const fs = require('fs')
 const eventData = require('../../../data/events/users');
+
 const { generarJWT } = require('../../../../helpers/jwt');
 
 const generateToken = async (req, res, next) => {
@@ -10,6 +12,7 @@ const generateToken = async (req, res, next) => {
              // Generar el TOKEN - JWT
         const token = await generarJWT( data.persona );
          url ='https://servpublico.maisondesante.org.pe/api/decode/'+ token
+         
         res.json({
             ok: true,
             urltoken:url
@@ -28,13 +31,29 @@ const decifrarToken = async (req, res, next) => {
     try {
         // decode el TOKEN - JWT
         var decode= jwt_decode(token);
-        console.log(decode.uid);
        const insert = await eventData.enableChangePassword(decode.uid);
-        res.json({
+       if(insert){
+            console.log('exitoso'); res.json({
             ok: true,
             insert
         });
-       // res.send(event);
+        
+        }else {
+            console.log('error'); 
+            res.json({
+                ok: false,
+                insert
+                });
+       
+        }      
+       /*fs.readFile('/Users/webhelp/Desktop/alex/api-citas/templates/01/error.html', 'utf8' , (err, data) => {
+        if (err) {
+          console.error(err)
+          return
+        }
+        res.end(data)
+      })*/  
+       
     } catch (error) {
         res.status(500).json({
             ok: false,
