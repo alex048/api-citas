@@ -83,7 +83,7 @@ router.get('/termsconditions',terminos.getTerminosCondiciones);
 router.post('/mailcitas',mailpass.sendMailCitas);
 router.post('/mailnewacount',mailpass.sendNewAcountUserPassword);
 router.post('/maillinkvalidate',mailpass.sendValidateMailLinkPassword);
-router.post('/maillinkvalidate',mailpass.sendMailPasswordChangeNew);
+router.post('/mailupdatepassword',mailpass.sendMailPasswordChangeNew);
 // Message
 router.get('/message',message.getMessage);
 // Message

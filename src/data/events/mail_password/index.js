@@ -2399,7 +2399,7 @@ const sendMailPasswordChangeNew = async (data) => {
     var mailOptions = {
       from: `'Clínica Maison de Santé' <webmaster@clubdelasalud.pe>`,
       to: `${data.mail}`,
-      subject: `${data.subject}`,
+      subject: `Actulización de contraseña`,
       html: `
       <!DOCTYPE html>
       <html
@@ -2642,10 +2642,10 @@ const sendMailPasswordChangeNew = async (data) => {
                                               <strong>${data.paciente}</strong>, este
                                               correo es para notificarle el cambio
                                               exitoso de su contraseña en
-                                              el <strong>${data.NOMBRE_SYS}</strong> . Su
+                                              la <strong>${data.nombresys}</strong> . Su
                                               código de usuario
-                                              es <strong>${data.usuario}</strong> y su
-                                              contraseña actual es: <strong
+                                              es <strong>${data.usuario}</strong> y su nueva
+                                              contraseña es: <strong
                                                 >${data.password}</strong
                                               >
                                             </p>

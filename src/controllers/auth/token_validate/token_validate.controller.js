@@ -87,10 +87,12 @@ const updatePassword = async (req, res, next) => {
       req.body.password = result.password;
       const data = req.body;
       const insert = await updateData.updatePassword(data);
+      const persona = await updateData.getUpdatePersona(username)
       if(insert.rowsAffected[0] === 1){
         return res.json({
           ok: true,
           msg: 'Success, contraseña Actulizado',
+          user:persona,
           insert
       });
       }

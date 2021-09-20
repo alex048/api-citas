@@ -42,9 +42,21 @@ const updatePassword = async(data) => {
         return error.message;
     }
 }
-
+const getUpdatePersona = async(usuario) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('password_crypto');
+        const event = await pool.request()
+                            .input('usuario', sql.NVarChar, usuario)
+                            .query(sqlQueries.eventGetPerosna);
+        return event.recordset[0];
+    } catch (error) {
+        return error.message;
+    }
+}
 module.exports = {
     cryptoPassword,
     decryptPassword,
-    updatePassword
+    updatePassword,
+    getUpdatePersona
 }
