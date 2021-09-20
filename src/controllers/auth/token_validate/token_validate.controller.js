@@ -80,7 +80,7 @@ const getValidatePasswordResultMail = async (req, res, next) => {
     }
 }
 const updatePassword = async (req, res, next) => {
-    const { username,password } = req.body;
+    const { username,password } = req.body; 
     try {
 
       const result = await updateData.cryptoPassword(password);
