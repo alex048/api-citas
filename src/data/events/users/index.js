@@ -159,7 +159,7 @@ const enableChangePassword = async (persona) => {
         const insertEvent = await pool.request()
                             .input('persona', sql.Int, persona)                            
                             .query(sqlQueries.enableChangePassword);
-        return insertEvent.recordset;
+        return insertEvent;
     } catch (error) {
         return error.message;
     }
@@ -177,6 +177,18 @@ const validateChangePassword = async (persona) => {
         return error.message;
     }
 };
+const validatePasswordResultMail = async (usuario) => {    
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const insertEvent = await pool.request()
+                            .input('usuario', sql.VarChar, usuario)                            
+                            .query(sqlQueries.eventValidatePassowordResulMail);
+        return insertEvent.recordset[0];
+    } catch (error) {
+        return error.message;
+    }
+};
 module.exports = {
     getValidateUser,
     login,
@@ -188,5 +200,6 @@ module.exports = {
     getByDocumentPerson,
     updatePersona,
     enableChangePassword,
-    validateChangePassword
+    validateChangePassword,
+    validatePasswordResultMail
 }

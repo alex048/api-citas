@@ -11,7 +11,7 @@ const generateToken = async (req, res, next) => {
     try {
              // Generar el TOKEN - JWT
         const token = await generarJWT( data.persona );
-         url ='https://servpublico.maisondesante.org.pe/api/decode/'+ token
+         url ='http://localhost:3000/api/decode/'+ token
          
         res.json({
             ok: true,
@@ -32,28 +32,25 @@ const decifrarToken = async (req, res, next) => {
         // decode el TOKEN - JWT
         var decode= jwt_decode(token);
        const insert = await eventData.enableChangePassword(decode.uid);
-       if(insert){
-            console.log('exitoso'); res.json({
-            ok: true,
-            insert
-        });
-        
+       if(insert.rowsAffected[0] === 1){           
+        fs.readFile('D:/proyecto-app-maison/backend-app/api-citas/templates/01/index.html', 'utf8' , (err, data) => {
+            if (err) {
+              console.error(err)
+              return
+            }
+            res.end(data)
+          })
         }else {
-            console.log('error'); 
-            res.json({
-                ok: false,
-                insert
-                });
+            fs.readFile('D:/proyecto-app-maison/backend-app/api-citas/templates/01/error.html', 'utf8' , (err, data) => {
+                if (err) {
+                  console.error(err)
+                  return
+                }
+                res.end(data)
+              })
        
         }      
-       /*fs.readFile('/Users/webhelp/Desktop/alex/api-citas/templates/01/error.html', 'utf8' , (err, data) => {
-        if (err) {
-          console.error(err)
-          return
-        }
-        res.end(data)
-      })*/  
-       
+    
     } catch (error) {
         res.status(500).json({
             ok: false,
@@ -73,9 +70,19 @@ const getValidateChangePassword = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+const getValidatePasswordResultMail = async (req, res, next) => {
+    const usuario = req.params.usuario;
+    try {
+        const event = await eventData.validatePasswordResultMail(usuario);
+        res.send(event);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
 
 module.exports = {
     generateToken,
     decifrarToken,
-    getValidateChangePassword
+    getValidateChangePassword,
+    getValidatePasswordResultMail
 }

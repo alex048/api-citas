@@ -52,6 +52,7 @@ router.delete('/user/:usuario', deleteUser.deleteUser);
 router.post('/generateToken', token.generateToken);
 router.get('/decode/:tokenvalidate', token.decifrarToken);
 router.get('/validatechangepassword/:persona', token.getValidateChangePassword);
+router.get('/passwordresult/:usuario', token.getValidatePasswordResultMail);
 // PersonMAST
 router.get('/person/:document',  personm.getPersonM);
 router.put('/person',validarJWT,  personm.updatePersona);
