@@ -87,7 +87,8 @@ const updatePassword = async (req, res, next) => {
       req.body.password = result.password;
       const data = req.body;
       const insert = await updateData.updatePassword(data);
-      const persona = await updateData.getUpdatePersona(username)
+      const persona = await updateData.getUpdatePersona(username);
+      console.log(persona)
       if(insert.rowsAffected[0] === 1){
         return res.json({
           ok: true,

@@ -1,1 +1,1 @@
-SELECT * FROM  CW_USUARIO WHERE Usuario=@usuario;
+SELECT * FROM  CW_USUARIO WHERE Usuario=@username

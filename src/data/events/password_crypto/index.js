@@ -47,9 +47,10 @@ const getUpdatePersona = async(usuario) => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('password_crypto');
         const event = await pool.request()
-                            .input('usuario', sql.NVarChar, usuario)
-                            .query(sqlQueries.eventGetPerosna);
-        return event.recordset[0];
+                            .input('username', sql.NVarChar, usuario)
+                            .query('SELECT * FROM  CW_USUARIO WHERE Usuario=@username');
+                            console.log(sqlQueries.eventGetPerosna)
+        return event.recordset;
     } catch (error) {
         return error.message;
     }
