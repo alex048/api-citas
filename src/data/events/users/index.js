@@ -189,6 +189,18 @@ const validatePasswordResultMail = async (usuario) => {
         return error.message;
     }
 };
+const isValidado = async (Documento) => {    
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const insertEvent = await pool.request()
+                            .input('Documento', sql.Int, Documento)                            
+                            .query(sqlQueries.isAfiliado);
+        return insertEvent.recordset[0];
+    } catch (error) {
+        return error.message;
+    }
+};
 module.exports = {
     getValidateUser,
     login,
@@ -201,5 +213,6 @@ module.exports = {
     updatePersona,
     enableChangePassword,
     validateChangePassword,
-    validatePasswordResultMail
+    validatePasswordResultMail,
+    isValidado
 }

@@ -35,10 +35,12 @@ const login = async (req, res, next) => {
         // Generar el TOKEN - JWT
         const token = await generarJWT( usuario.Persona );
         const user = await eventData.getByDocumentPerson(username);
+        const afiliado = await eventData.isValidado(username);
         res.json({
             ok: true,
             token,
-	    user:user[0]
+	    user:user[0],
+        afiliado:afiliado
         });
        // res.send(event);
     } catch (error) {

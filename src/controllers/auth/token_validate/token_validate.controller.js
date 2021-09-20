@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt_decode = require('jwt-decode');
 const fs = require('fs')
 const eventData = require('../../../data/events/users');
-
+const updateData = require('../../../data/events/password_crypto');
 const { generarJWT } = require('../../../../helpers/jwt');
 
 const generateToken = async (req, res, next) => {
@@ -11,7 +11,7 @@ const generateToken = async (req, res, next) => {
     try {
              // Generar el TOKEN - JWT
         const token = await generarJWT( data.persona );
-         url ='http://localhost:3000/api/decode/'+ token
+         url ='https://servpublico.maisondesante.org.pe/api/decode/'+ token
          
         res.json({
             ok: true,
@@ -33,7 +33,7 @@ const decifrarToken = async (req, res, next) => {
         var decode= jwt_decode(token);
        const insert = await eventData.enableChangePassword(decode.uid);
        if(insert.rowsAffected[0] === 1){           
-        fs.readFile('D:/proyecto-app-maison/backend-app/api-citas/templates/01/index.html', 'utf8' , (err, data) => {
+        fs.readFile('/var/www/html/servpublico.maisondesante.org.pe/templates/01/index.html', 'utf8' , (err, data) => {
             if (err) {
               console.error(err)
               return
@@ -41,7 +41,7 @@ const decifrarToken = async (req, res, next) => {
             res.end(data)
           })
         }else {
-            fs.readFile('D:/proyecto-app-maison/backend-app/api-citas/templates/01/error.html', 'utf8' , (err, data) => {
+            fs.readFile('/var/www/html/servpublico.maisondesante.org.pe/templates/01/error.html', 'utf8' , (err, data) => {
                 if (err) {
                   console.error(err)
                   return
@@ -79,10 +79,38 @@ const getValidatePasswordResultMail = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
+const updatePassword = async (req, res, next) => {
+    const { username,password } = req.body;
+    try {
 
+      const result = await updateData.cryptoPassword(password);
+      req.body.password = result.password;
+      const data = req.body;
+      const insert = await updateData.updatePassword(data);
+      if(insert.rowsAffected[0] === 1){
+        return res.json({
+          ok: true,
+          msg: 'Success, contraseña Actulizado',
+          insert
+      });
+      }
+      return res.json({
+        ok: false,
+        insert
+    });
+    } catch (error) {
+       // res.status(400).send(error.message);
+      return res.status(500).json({
+          ok: false,
+          msg: 'Hable con el administrador',
+          error:error.message
+      })
+    }
+  }
 module.exports = {
     generateToken,
     decifrarToken,
     getValidateChangePassword,
-    getValidatePasswordResultMail
+    getValidatePasswordResultMail,
+    updatePassword
 }

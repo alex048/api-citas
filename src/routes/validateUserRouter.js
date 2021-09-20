@@ -53,6 +53,7 @@ router.post('/generateToken', token.generateToken);
 router.get('/decode/:tokenvalidate', token.decifrarToken);
 router.get('/validatechangepassword/:persona', token.getValidateChangePassword);
 router.get('/passwordresult/:usuario', token.getValidatePasswordResultMail);
+router.post('/uppassword',token.updatePassword);
 // PersonMAST
 router.get('/person/:document',  personm.getPersonM);
 router.put('/person',validarJWT,  personm.updatePersona);

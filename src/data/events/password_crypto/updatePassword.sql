@@ -1,0 +1,1 @@
+UPDATE CW_USUARIO SET Clave = @password WHERE Usuario=@usuario; 

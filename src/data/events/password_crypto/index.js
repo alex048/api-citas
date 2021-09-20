@@ -29,8 +29,22 @@ const decryptPassword = async(usuario,password) => {
         return error.message;
     }
 }
+const updatePassword = async(usuario,password) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('password_crypto');
+        const event = await pool.request()
+                            .input('password', sql.NVarChar, password)
+                            .input('usuario', sql.NVarChar, usuario)
+                            .query(sqlQueries.updatePassword);
+        return event;
+    } catch (error) {
+        return error.message;
+    }
+}
 
 module.exports = {
     cryptoPassword,
-    decryptPassword
+    decryptPassword,
+    updatePassword
 }
