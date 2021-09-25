@@ -12,7 +12,6 @@ const generateToken = async (req, res, next) => {
              // Generar el TOKEN - JWT
         const token = await generarJWT( data.persona );
          url ='https://servpublico.maisondesante.org.pe/api/decode/'+ token
-         
         res.json({
             ok: true,
             urltoken:url
@@ -32,7 +31,7 @@ const decifrarToken = async (req, res, next) => {
         // decode el TOKEN - JWT
         var decode= jwt_decode(token);
        const insert = await eventData.enableChangePassword(decode.uid);
-       if(insert.rowsAffected[0] === 1){           
+       if(insert.rowsAffected[0] === 1){
         fs.readFile('/var/www/html/servpublico.maisondesante.org.pe/templates/01/index.html', 'utf8' , (err, data) => {
             if (err) {
               console.error(err)
@@ -82,13 +81,11 @@ const getValidatePasswordResultMail = async (req, res, next) => {
 const updatePassword = async (req, res, next) => {
     const { username,password } = req.body; 
     try {
-
+      const persona = await updateData.getUpdatePersona(username);
       const result = await updateData.cryptoPassword(password);
       req.body.password = result.password;
       const data = req.body;
       const insert = await updateData.updatePassword(data);
-      const persona = await updateData.getUpdatePersona(username);
-      console.log(persona)
       if(insert.rowsAffected[0] === 1){
         return res.json({
           ok: true,
