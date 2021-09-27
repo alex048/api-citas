@@ -29,11 +29,10 @@ const login = async (req, res, next) => {
         if (validPassword.status === 'False' ) {
             return res.status(400).json({
                 ok: false,
-                msg: 'Contraseña no válida'
+                msg: 'Contraseña o Usuario no valido'
             });
         }
-        
-        if(validPassword.status === 'True' ){
+       if(validPassword.status === 'True' ){
             // Generar el TOKEN - JWT
             const token = await generarJWT( usuario.Persona );
             const user = await eventData.getByDocumentPerson(username);
@@ -42,14 +41,15 @@ const login = async (req, res, next) => {
                 ok: true,
                 token,
             user:user[0],
-            afiliado:afiliado
+            afiliado:afiliado.length
             });
         }
-
-        res.status(400).json({
+         if(validPassword.status === 'False' ||validPassword.status === 'True' ){
+			return  res.status(400).json({
             ok: false,
             msg: 'error decifrar clave,',
         });
+		 }
        
        // res.send(event);
     } catch (error) {

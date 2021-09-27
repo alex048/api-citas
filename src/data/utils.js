@@ -4,9 +4,9 @@ const {join} = require('path');
 //const path = require('path');
 const loadSqlQueries = async (folderName) => {
     // route desarrollo 
-   // const filePath = join(`D:/proyecto-app-maison/backend-app/api-citas/src/data/events/`, folderName);
+    const filePath = join(`D:/proyecto-app-maison/backend-app/api-citas/src/data/events/`, folderName);
     // route produccion
-    const filePath = join(`/var/www/html/servpublico.maisondesante.org.pe/src/data/events/`, folderName);
+   // const filePath = join(`/var/www/html/servpublico.maisondesante.org.pe/src/data/events/`, folderName);
    //const filePath = path.basename('data/events/'+folderName);
     const files = await fs.readdir(filePath);
     const sqlFiles = files.filter(f => f.endsWith('.sql'));

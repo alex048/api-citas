@@ -194,9 +194,10 @@ const isValidado = async (Documento) => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertEvent = await pool.request()
-                            .input('Documento', sql.Int, Documento)                            
+                            .input('Documento', sql.VarChar, Documento)                            
                             .query(sqlQueries.isAfiliado);
-        return insertEvent.recordset[0];
+                            console.log(insertEvent);
+        return insertEvent.recordset;
     } catch (error) {
         return error.message;
     }

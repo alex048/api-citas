@@ -28,6 +28,9 @@ const message= require('../controllers/message/message.controllers');
 
 //logo niubiz
 const logsNiubiz= require('../controllers/niubiz/niubiz.controllers');
+//cuotas afiliado
+const dues= require('../controllers/dues/dues.controlles');
+
 //PORTAL WEB
 const cie10= require('../portal_controllers/cie10/cie10.Controllers');
 const horario= require('../portal_controllers/horario_medico/horario.controllers');
@@ -41,21 +44,29 @@ const router = express.Router();
 // user
 router.post('/login', login.login);
 router.get('/validate/:document',  eventControlllerValidate.getEventValidateUser);
-//correlativo id persona
+//correlativo get id persona
 router.get('/correlativo',  correlativo.getEventCorrelativo);
+//correlativo update persona
 router.put('/correlativo',  correlativo.updateCorrelativo);
 //create user
 router.post('/create', create.createUser);
+//create user persona
 router.post('/create/persona',  create.createPersona);
+//delete user
 router.delete('/user/:usuario', deleteUser.deleteUser);
-
+// generar token
 router.post('/generateToken', token.generateToken);
+//decodifcar token
 router.get('/decode/:tokenvalidate', token.decifrarToken);
+// validar usuario
 router.get('/validatechangepassword/:persona', token.getValidateChangePassword);
+// resulta  password
 router.get('/passwordresult/:usuario', token.getValidatePasswordResultMail);
+// update password
 router.post('/uppassword',token.updatePassword);
 // PersonMAST
 router.get('/person/:document',  personm.getPersonM);
+// update PersonMAST
 router.put('/person',validarJWT,  personm.updatePersona);
 //Sucursal
 router.get('/sucursal',validarJWT, sucursal.getSucursal);
@@ -67,6 +78,7 @@ router.get('/specialty/:sucursal',validarJWT,specialty.getSpecialty);
 router.get('/doctors',validarJWT,medico.getListMedico);
 //Medico por especialidad
 router.get('/doctorspecialty/:sucursal/:codigo',validarJWT,medico.getMedicoEspecialidad);
+// horarios medicos
 router.post('/doctorshorario',validarJWT,medico.getHorarioMedicoEspecialidad);
 router.get('/listdoctorfechahora/:idespecialidad/:fecha/:sucursal',validarJWT,medico.getHorarioMedicoFechaHora);
 // lista de citas
@@ -79,7 +91,7 @@ router.post('/appointment',validarJWT,citas.registerAppointment);
 router.post('/canceldate',validarJWT,citas.calcelDate);
 //terminos y condiciones
 router.get('/termsconditions',terminos.getTerminosCondiciones);
-// mail 
+// mail
 router.post('/mailcitas',mailpass.sendMailCitas);
 router.post('/mailnewacount',mailpass.sendNewAcountUserPassword);
 router.post('/maillinkvalidate',mailpass.sendValidateMailLinkPassword);
@@ -88,6 +100,12 @@ router.post('/mailupdatepassword',mailpass.sendMailPasswordChangeNew);
 router.get('/message',message.getMessage);
 // Message
 router.post('/logsniubiz',validarJWT,logsNiubiz.registerLogNiubiz);
+
+//cuotas de afiliados
+// pagados
+router.get('/coutospaid/:documento',validarJWT,dues.getCoutosPaid);
+// pendientes
+router.get('/coutospending/:documento',validarJWT,dues.getCoutosPending);
 
 //PORTAL WEB
 router.get('/cie10',cie10.getCIE10);

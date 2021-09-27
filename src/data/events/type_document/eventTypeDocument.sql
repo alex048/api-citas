@@ -1,2 +1,1 @@
-SELECT id=RTRIM(CodigoElemento),descripcion=RTRIM(DescripcionLocal)
-FROM [SpringSaludDesarrollo3].[dbo].MA_MiscelaneosDetalle where CodigoTabla = 'TIPODOCI'
+SELECT TOP 100 Codigo as id, Nombre as descripcion from CM_CO_TablaMaestroDetalle WHERE Grupo ='WEB' AND IdTablaMaestro = 110 AND Estado = 2
