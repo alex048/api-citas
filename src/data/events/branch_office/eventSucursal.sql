@@ -1,5 +1,6 @@
-
-SELECT id = RTRIM(Sucursal)
+SELECT  id = RTRIM(Sucursal)
       ,descripcionLocal = RTRIM(DescripcionLocal)
-      ,direccion= RTRIM(DIRECCION)
+      ,direccion= RTRIM(DIRECCION),
+      imagen_sede as imagen,
+      estado_atencion_amb as estado
   FROM [SpringSaludDesarrollo3].[dbo].[AC_Sucursal] where Sucursal IN('0001','0002','0004')

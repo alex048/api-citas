@@ -1,0 +1,1 @@
+select imagen,mensaje from dbo.CMS_SW_MENSAJES where grupo = 'APPCABECER' and  estado = 'a'
