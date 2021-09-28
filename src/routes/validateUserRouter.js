@@ -98,6 +98,8 @@ router.post('/maillinkvalidate',mailpass.sendValidateMailLinkPassword);
 router.post('/mailupdatepassword',mailpass.sendMailPasswordChangeNew);
 // Message
 router.get('/message',message.getMessage);
+// slider message
+router.get('/infomessage',message.getSliderMessage);
 // Message
 router.post('/logsniubiz',validarJWT,logsNiubiz.registerLogNiubiz);
 
