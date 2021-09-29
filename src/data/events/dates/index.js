@@ -2,9 +2,8 @@
 const utils = require('../../utils');
 const config = require('../../../../database/config');
 const sql = require('mssql');
-
 const getAllDateDoctors =  async(data) => {
-    try {
+    try {    
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('dates');
         const eventsList = await pool.request()

@@ -12,7 +12,7 @@ const registerLogNiubiz = async (data) => {
         const insertEvent = await pool.request()
                             .input('id_operaciones', sql.Char(36), data.idoperaciones)
                             .input('id_cita', sql.Int, data.idcita)
-                            .input('status', sql.Int, data.status)
+                            .input('status', sql.Text, data.status)
                             .input('cabecera', sql.Text, data.cabecera)
                             .input('fecha_creacion', sql.DateTime, fecha_registro)
                             .query(sqlQueries.eventNiubiz);
