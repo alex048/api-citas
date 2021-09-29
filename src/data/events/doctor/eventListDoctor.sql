@@ -25,7 +25,7 @@ FROM     PersonaMast p
 			INNER JOIN SG_SucursalMedico sm ON sm.IdMedico = em.IdMedico
 			INNER JOIN SS_GE_Especialidad e ON em.IdEspecialidad = e.IdEspecialidad
 WHERE e.Estado = 2 AND p.Estado='A'
--- AND em.Estado = 2
-and e.ambulatorio_web='A'
+AND em.Estado = 2
+-- and e.ambulatorio_web='A'
 AND sm.estado = 2
 ORDER BY e.Nombre, p.ApellidoPaterno, p.ApellidoMaterno, p.Nombres
