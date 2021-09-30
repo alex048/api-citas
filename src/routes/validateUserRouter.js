@@ -111,9 +111,9 @@ router.get('/coutospaid/:documento',validarJWT,dues.getCoutosPaid);
 router.get('/coutospending/:documento',validarJWT,dues.getCoutosPending);
 //DATES DOCTOS
 //ALL DATES
-router.get('/datesall/:idEspecialidad/:periodo/:sede',validarJWT,dates.getAllDateDoctors);
+router.get('/datesall/:idEspecialidad/:sede',validarJWT,dates.getAllDateDoctors);
 //ONE DATE
-router.get('/dateone/:idMedico/:idEspecialidad/:periodo/:sede',validarJWT,dates.getOneDateDoctors);
+router.get('/dateone/:idMedico/:idEspecialidad/:sede',validarJWT,dates.getOneDateDoctors);
 
 //PORTAL WEB
 router.get('/cie10',cie10.getCIE10);
