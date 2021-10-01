@@ -32,6 +32,8 @@ const logsNiubiz= require('../controllers/niubiz/niubiz.controllers');
 const dues= require('../controllers/dues/dues.controlles');
 //DATES FOR DOCTOS
 const dates= require('../controllers/dates/dates.controllers');
+//PREIO CITA
+const precio= require('../controllers/precio_cita/precioCita.controllers');
 //PORTAL WEB
 const cie10= require('../portal_controllers/cie10/cie10.Controllers');
 const horario= require('../portal_controllers/horario_medico/horario.controllers');
@@ -45,10 +47,10 @@ const router = express.Router();
 // user
 router.post('/login', login.login);
 router.get('/validate/:document',  eventControlllerValidate.getEventValidateUser);
+router.get('/validateuser/:document',  eventControlllerValidate.getEventValidateUserCitas);
 //correlativo get id persona
 router.get('/correlativo',  correlativo.getEventCorrelativo);
-//correlativo update persona
-router.put('/correlativo',  correlativo.updateCorrelativo);
+//correlativo update personarouter.put('/correlativo',  correlativo.updateCorrelativo);
 //create user
 router.post('/create', create.createUser);
 //create user persona
@@ -114,7 +116,8 @@ router.get('/coutospending/:documento',validarJWT,dues.getCoutosPending);
 router.get('/datesall/:idEspecialidad/:sede',validarJWT,dates.getAllDateDoctors);
 //ONE DATE
 router.get('/dateone/:idMedico/:idEspecialidad/:sede',validarJWT,dates.getOneDateDoctors);
-
+//Precio cita
+router.get('/price/:sede/:tipoPaciente/:idTipoPrograma',validarJWT,precio.getPrecioCita);
 //PORTAL WEB
 router.get('/cie10',cie10.getCIE10);
 router.get('/horario',horario.getHorarioM);

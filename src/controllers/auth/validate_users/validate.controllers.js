@@ -12,6 +12,16 @@ const getEventValidateUser = async (req, res, next) => {
         res.status(400).send(error.message);
     }
 }
-module.exports = {
-    getEventValidateUser
+const getEventValidateUserCitas = async (req, res, next) => { 
+    try {
+        const document = req.params.document;
+        const event = await eventData.getValidateUserCitas(document);
+        res.send(event[0]);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+module.exports = { 
+    getEventValidateUser,
+    getEventValidateUserCitas
 }

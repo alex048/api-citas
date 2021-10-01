@@ -30,6 +30,7 @@ const getListMedico = async (req, res, next) => {
                 id:row.id,	
                 codigo: row.codigo,
                 descripcion: row.descripcion,
+                sede:row.sede,
               });
         }
       });

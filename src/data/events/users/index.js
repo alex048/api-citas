@@ -29,7 +29,18 @@ const getValidateUser = async(documento) => {
         return error.message;
     }
 };
-
+const getValidateUserCitas = async(documento) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('users');
+        const event = await pool.request()
+                            .input('documento', sql.VarChar, documento)
+                            .query(sqlQueries.evenValidateUserCItas);
+        return event.recordset;
+    } catch (error) {
+        return error.message;
+    }
+};
 const getCorrelativoIDPersona = async () => {
     try {
         let pool = await sql.connect(config.sql);
@@ -215,5 +226,6 @@ module.exports = {
     enableChangePassword,
     validateChangePassword,
     validatePasswordResultMail,
+    getValidateUserCitas,
     isValidado
 }

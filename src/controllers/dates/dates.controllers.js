@@ -65,7 +65,7 @@ const getOneDateDoctors = async (req, res, next) => {
             
         } */
         const eventlist = await eventData.getOneDateDoctors(data);
-        res.send(fechas[0]);
+        res.send(eventlist);
     } catch (error) {
         res.status(400).send(error.message);
     }
