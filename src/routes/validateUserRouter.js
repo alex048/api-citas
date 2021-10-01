@@ -30,7 +30,8 @@ const message= require('../controllers/message/message.controllers');
 const logsNiubiz= require('../controllers/niubiz/niubiz.controllers');
 //cuotas afiliado
 const dues= require('../controllers/dues/dues.controlles');
-
+//DATES FOR DOCTOS
+const dates= require('../controllers/dates/dates.controllers');
 //PORTAL WEB
 const cie10= require('../portal_controllers/cie10/cie10.Controllers');
 const horario= require('../portal_controllers/horario_medico/horario.controllers');
@@ -108,6 +109,11 @@ router.post('/logsniubiz',validarJWT,logsNiubiz.registerLogNiubiz);
 router.get('/coutospaid/:documento',validarJWT,dues.getCoutosPaid);
 // pendientes
 router.get('/coutospending/:documento',validarJWT,dues.getCoutosPending);
+//DATES DOCTOS
+//ALL DATES
+router.get('/datesall/:idEspecialidad/:sede',validarJWT,dates.getAllDateDoctors);
+//ONE DATE
+router.get('/dateone/:idMedico/:idEspecialidad/:sede',validarJWT,dates.getOneDateDoctors);
 
 //PORTAL WEB
 router.get('/cie10',cie10.getCIE10);
