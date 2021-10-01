@@ -80,12 +80,12 @@ const getValidatePasswordResultMail = async (req, res, next) => {
 }
 const updatePassword = async (req, res, next) => {
     const { username,password } = req.body; 
-    try {
-      const persona = await updateData.getUpdatePersona(username);
+    try {     
       const result = await updateData.cryptoPassword(password);
       req.body.password = result.password;
       const data = req.body;
       const insert = await updateData.updatePassword(data);
+      const persona = await updateData.getUpdatePersona(username);
       if(insert.rowsAffected[0] === 1){
         return res.json({
           ok: true,
