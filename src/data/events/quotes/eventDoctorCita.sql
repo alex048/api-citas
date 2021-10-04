@@ -3,6 +3,9 @@ SELECT a.idcita,
        (SELECT RTRIM(x.nombre)
         FROM   ge_sucursal x
         WHERE  x.sucursal = a.sucursal)             AS sucursal,
+       (SELECT RTRIM(x.sucursal)
+        FROM   ge_sucursal x
+        WHERE  x.sucursal = a.sucursal)             AS idsucursal,
        (SELECT Ltrim(Rtrim(x.nombrecompleto))
         FROM   personamast x
         WHERE  x.persona = b.medico)                AS nombreMedico,

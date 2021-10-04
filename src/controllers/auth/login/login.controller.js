@@ -41,7 +41,8 @@ const login = async (req, res, next) => {
                 ok: true,
                 token,
             user:user[0],
-            afiliado:afiliado.length
+            afiliado:afiliado,
+            isAfiliado:afiliado.length
             });
         }
          if(validPassword.status === 'False' ||validPassword.status === 'True' ){

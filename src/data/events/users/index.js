@@ -89,12 +89,12 @@ const createUser = async (data) => {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertEvent = await pool.request()
-                            .input('username', sql.NVarChar(20), data.username)
-                            .input('names', sql.NVarChar(100), data.names)
-                            .input('password', sql.NVarChar(200), data.password)
-                            .input('sqllogin', sql.NVarChar(20), 'CW')
-                            .input('state', sql.NChar(1), 'A')
-                            .input('registerUser', sql.NVarChar(25), data.username)
+                            .input('username', sql.NVarChar, data.username)
+                            .input('names', sql.NVarChar, data.names)
+                            .input('password', sql.NVarChar, data.password)
+                            .input('sqllogin', sql.NVarChar, 'CW')
+                            .input('state', sql.NChar, 'A')
+                            .input('registerUser', sql.NVarChar, data.username)
                             .input('person', sql.Int, data.person)
                             .input('FechaRegistro', sql.DateTime, fechaRegistro)
                             .query(sqlQueries.eventRegisterUser);

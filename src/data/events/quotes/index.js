@@ -68,7 +68,7 @@ const getMedicoCitaOne = async(idPaciente) => {
                             .input('idCita', sql.Int, data.idCita)
                             .input('usuario', sql.NVarChar, data.usuario)
                             .query(sqlQueries.eventDeleteQuotes);
-        return insertEvent.recordset[0];
+        return insertEvent.recordset;
     } catch (error) {
         return error.message;
     }

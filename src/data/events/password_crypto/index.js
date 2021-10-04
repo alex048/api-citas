@@ -35,7 +35,7 @@ const updatePassword = async(data) => {
         const sqlQueries = await utils.loadSqlQueries('password_crypto');
         const event = await pool.request()
                             .input('password', sql.NVarChar, data.password)
-                            .input('usuario', sql.NVarChar, data.usuario)
+                            .input('usuario', sql.NVarChar, data.username)
                             .query(sqlQueries.updatePassword);
         return event;
     } catch (error) {
