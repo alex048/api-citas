@@ -1,1 +1,1 @@
-select enableChangePassword from cw_usuario where persona =  @persona
+select enableChangePassword,isChangePassword from cw_usuario where persona =  @persona

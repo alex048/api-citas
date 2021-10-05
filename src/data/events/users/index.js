@@ -97,6 +97,7 @@ const createUser = async (data) => {
                             .input('registerUser', sql.NVarChar, data.username)
                             .input('person', sql.Int, data.person)
                             .input('FechaRegistro', sql.DateTime, fechaRegistro)
+                            .input('isChangePassword',sql.Int, 0)
                             .query(sqlQueries.eventRegisterUser);
         return insertEvent.recordset;
     } catch (error) {

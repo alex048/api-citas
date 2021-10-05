@@ -7,7 +7,8 @@ INSERT INTO [dbo].[CW_USUARIO]
         [Estado],
         [UltimoUsuario],
 		[Persona],
-        [FechaRegistro]
+        [FechaRegistro],
+        [isChangePassword]
     )
 VALUES
     (
@@ -18,6 +19,7 @@ VALUES
         @state,
         @registerUser,
         @person,
-        @FechaRegistro
+        @FechaRegistro,
+        @isChangePassword
     )
 SELECT  max(FechaRegistro) AS fecha FROM [CW_USUARIO]
