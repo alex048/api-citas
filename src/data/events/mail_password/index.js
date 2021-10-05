@@ -24,7 +24,7 @@ const sendMailCitas = async (data) => {
     var mailOptions = {
       from: `'Clínica Maison de Santé' <webmaster@clubdelasalud.pe>`,
       to: `${data.mail}`,
-      subject: `${data.subject}`,
+      subject: `Reserva de Cita`,
       html: `
       <!DOCTYPE html>
 <html
@@ -614,7 +614,7 @@ const sendMailCitas = async (data) => {
                                           ><strong
                                             ><span style=""
                                               >Sede                 :
-                                              ${sucursal}</span
+                                              ${data.sucursal}</span
                                             ></strong
                                           ></span
                                         >
@@ -665,7 +665,7 @@ const sendMailCitas = async (data) => {
                                           ><strong
                                             ><span style=""
                                               >Dirección         :
-                                               ${direccion}</span
+                                               ${data.direccion}</span
                                             ></strong
                                           ></span
                                         >

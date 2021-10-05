@@ -107,10 +107,21 @@ const updatePassword = async (req, res, next) => {
       })
     }
   }
+  const updateChangePasswordSate = async (req, res, next) => {
+    try {
+        const data = req.body;
+        const insert = await updateData.updateChangePassword(data);
+        res.send(insert);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+  }
+  
 module.exports = {
     generateToken,
     decifrarToken,
     getValidateChangePassword,
     getValidatePasswordResultMail,
-    updatePassword
+    updatePassword,
+    updateChangePasswordSate
 }

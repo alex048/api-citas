@@ -67,6 +67,8 @@ router.get('/validatechangepassword/:persona', token.getValidateChangePassword);
 router.get('/passwordresult/:usuario', token.getValidatePasswordResultMail);
 // update password
 router.post('/uppassword',token.updatePassword);
+// update state password change
+router.post('/updatestate',token.updateChangePasswordSate);
 // PersonMAST
 router.get('/person/:document',  personm.getPersonM);
 // update PersonMAST

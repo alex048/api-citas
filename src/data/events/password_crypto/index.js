@@ -54,9 +54,23 @@ const getUpdatePersona = async(usuario) => {
         return error.message;
     }
 }
+const updateChangePassword = async(data) => {
+    try {
+        let pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('password_crypto');
+        const event = await pool.request()
+                            .input('isChangePassword', sql.NVarChar, data.isChangePassword)
+                            .input('usuario', sql.NVarChar, data.username)
+                            .query(sqlQueries.eventUpdataChangePassword);
+        return event;
+    } catch (error) {
+        return error.message;
+    }
+}
 module.exports = {
     cryptoPassword,
     decryptPassword,
     updatePassword,
-    getUpdatePersona
+    getUpdatePersona,
+    updateChangePassword
 }

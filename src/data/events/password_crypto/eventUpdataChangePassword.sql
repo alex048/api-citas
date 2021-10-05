@@ -1,0 +1,1 @@
+UPDATE CW_USUARIO SET isChangePassword = @isChangePassword WHERE Usuario=@usuario;
