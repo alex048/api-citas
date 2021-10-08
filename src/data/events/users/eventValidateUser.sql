@@ -1,4 +1,4 @@
-SELECT COUNT ( PersonaMast.Documento ) as existe FROM [dbo].[PersonaMast]
+SELECT COUNT ( DISTINCT PersonaMast.Documento ) as existe FROM [dbo].[PersonaMast]
                             WHERE ( ( PersonaMast.TipoDocumento ='D'
                             AND PersonaMast.Documento =@documento
                             AND PersonaMast.TipoDocumento IS NOT NULL

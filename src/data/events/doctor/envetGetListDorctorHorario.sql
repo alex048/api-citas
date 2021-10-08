@@ -1,14 +1,14 @@
 SELECT DISTINCT
        idmedico        AS idMedico,
        empleado        AS idEmpleado,
-       apellidopaterno AS apellidoPaterno,
-       apellidomaterno AS apellidoMaterno,
-       nombres         AS nombre,
-       tipodocumento   AS tipoDocumento,
-       documento       AS documento,
-       fechanacimiento AS fechaNacimiento,
-       sexo            AS sexo,
-       direccion       AS direccion,
+       RTRIM(apellidopaterno) AS apellidoPaterno,
+       RTRIM(apellidomaterno) AS apellidoMaterno,
+       RTRIM(nombres)         AS nombre,
+       RTRIM(tipodocumento)   AS tipoDocumento,
+       RTRIM(documento)       AS documento,
+       RTRIM(fechanacimiento) AS fechaNacimiento,
+       RTRIM(sexo)            AS sexo,
+       RTRIM(direccion)       AS direccion,
 	   null		       AS sede
 FROM   dbo.vw_especialidad_medico as a
 WHERE  idmedico IN (SELECT a.medico

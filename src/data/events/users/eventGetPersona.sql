@@ -1,12 +1,12 @@
 SELECT
 Persona as id,
 RTRIM(Documento) as nroDocumento,
-ApellidoPaterno as apellidoPaterno,
-ApellidoMaterno as apellidoMaterno,
-Nombres as nombres,
-Telefono as telefono,
-Celular as celular,
-CorreoElectronico as correoElectronico,
-FechaNacimiento as fechaNacimiento ,
-Direccion as direccion,
-Sexo as sexo FROM PersonaMast  WHERE Documento =@documento
+RTRIM(ApellidoPaterno) as apellidoPaterno,
+RTRIM(ApellidoMaterno) as apellidoMaterno,
+RTRIM(Nombres) as nombres,
+RTRIM(Telefono) as telefono,
+RTRIM(Celular) as celular,
+RTRIM(CorreoElectronico) as correoElectronico,
+RTRIM(FechaNacimiento) as fechaNacimiento ,
+RTRIM(Direccion) as direccion,
+RTRIM(Sexo) as sexo FROM PersonaMast  WHERE Documento =@documento

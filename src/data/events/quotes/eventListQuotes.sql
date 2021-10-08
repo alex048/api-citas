@@ -1,7 +1,7 @@
 SELECT a.IdCita,
        a.FechaCita,
 
-  (SELECT x.Nombre
+  (SELECT RTRIM(x.Nombre)
    FROM GE_Sucursal x
    WHERE x.Sucursal = a.Sucursal) AS sucursal,
 

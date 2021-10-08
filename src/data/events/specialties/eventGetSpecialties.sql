@@ -1,4 +1,4 @@
-SELECT DISTINCT ho.idEspecialidad as id,e.Codigo as codigo, e.Nombre as descripcion, e.imagen as icon
+SELECT DISTINCT ho.idEspecialidad as id,RTRIM(e.Codigo) as codigo, RTRIM(e.Nombre )as descripcion, RTRIM(e.imagen )as icon
 FROM SS_CC_Horario ho, SS_GE_Especialidad e
 WHERE e.Estado=2 AND ho.Estado=2 
 	AND ho.IdEspecialidad = e.IdEspecialidad
