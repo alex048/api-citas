@@ -54,6 +54,7 @@ const getUpdatePersona = async(usuario) => {
         return error.message;
     }
 }
+
 const updateChangePassword = async(data) => {
     try {
         let pool = await sql.connect(config.sql);
