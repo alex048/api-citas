@@ -1,6 +1,7 @@
 'use strict';
 const utils = require('../../utils');
 const config = require('../../../../database/config');
+const querys = require('./query');
 const sql = require('mssql');
 const moment = require('moment');
 
@@ -10,7 +11,7 @@ const login = async(username) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const event = await pool.request()
                             .input('username', sql.NVarChar, username)
-                            .query(sqlQueries.eventFindOne);
+                            .query(querys.eventFindOne);
         return event.recordset;
     } catch (error) {
         return error.message;
@@ -23,7 +24,7 @@ const getValidateUser = async(documento) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const event = await pool.request()
                             .input('documento', sql.VarChar, documento)
-                            .query(sqlQueries.eventValidateUser);
+                            .query(querys.eventValidateUser);
         return event.recordset;
     } catch (error) {
         return error.message;
@@ -35,7 +36,7 @@ const getValidateUserCitas = async(documento) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const event = await pool.request()
                             .input('documento', sql.VarChar, documento)
-                            .query(sqlQueries.evenValidateUserCItas);
+                            .query(querys.evenValidateUserCItas);
         return event.recordset;
     } catch (error) {
         return error.message;
@@ -45,7 +46,7 @@ const getCorrelativoIDPersona = async () => {
     try {
         let pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('users');
-        const eventsList = await pool.request().query(sqlQueries.eventCorrelativo);
+        const eventsList = await pool.request().query(querys.eventCorrelativo);
         return eventsList.recordset;
     } catch (error) {
         console.log(error.message);
@@ -62,7 +63,7 @@ const updateCorrelativo = async (data) => {
                             .input('persona', sql.Int, data.persona)
                             .input('usuario', sql.NVarChar, data.usuario)
                             .input('fechahoraregistro',sql.DateTime, fechaRegistro)
-                            .query(sqlQueries.eventUpdateCorrelativo);
+                            .query(querys.eventUpdateCorrelativo);
         return insertEvent.recordset;
     } catch (error) {
         return error.message;
@@ -75,7 +76,7 @@ const getByDocumentPerson = async(document) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const event = await pool.request()
                             .input('documento', sql.NVarChar(20), document)
-                            .query(sqlQueries.eventGetPersona);
+                            .query(querys.eventGetPersona);
         return event.recordset;
     } catch (error) {
         return error.message;
@@ -98,7 +99,7 @@ const createUser = async (data) => {
                             .input('person', sql.Int, data.person)
                             .input('FechaRegistro', sql.DateTime, fechaRegistro)
                             .input('isChangePassword',sql.Int, 0)
-                            .query(sqlQueries.eventRegisterUser);
+                            .query(querys.eventRegisterUser);
         return insertEvent.recordset;
     } catch (error) {
         return error.message;
@@ -110,7 +111,7 @@ const deleteUser = async (usuario) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const deleteEvent = await pool.request()
                             .input('usuario', sql.VarChar, usuario)
-                            .query(sqlQueries.eventDeleteUser);
+                            .query(querys.eventDeleteUser);
         return deleteEvent.recordset;
     } catch (error) {
         return error.message;
@@ -141,7 +142,7 @@ const createPersona = async (data) => {
                             .input('Estado', sql.NChar(1), 'A')
                             .input('Celular', sql.NVarChar(15), data.celular)
                             .input('Pais', sql.NChar(4), 'PER')
-                            .query(sqlQueries.eventRegisterMPerson);
+                            .query(querys.eventRegisterMPerson);
         return insertEvent.rowsAffected;
     } catch (error) {
         return error.message;
@@ -158,7 +159,7 @@ const updatePersona = async(data) => {
                             .input('correo', sql.NVarChar, data.correo)
                             .input('direccion', sql.NVarChar, data.direccion)
                             .input('persona', sql.Int, data.persona)
-                            .query(sqlQueries.eventUpdatePersona);
+                            .query(querys.eventUpdatePersona);
         return event.recordset;
     } catch (error) {
         return error.message;
@@ -170,7 +171,7 @@ const enableChangePassword = async (persona) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertEvent = await pool.request()
                             .input('persona', sql.Int, persona)                            
-                            .query(sqlQueries.enableChangePassword);
+                            .query(querys.enableChangePassword);
         return insertEvent;
     } catch (error) {
         return error.message;
@@ -183,7 +184,7 @@ const validateChangePassword = async (persona) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertEvent = await pool.request()
                             .input('persona', sql.Int, persona)                            
-                            .query(sqlQueries.getValidateChangePassword);
+                            .query(querys.getValidateChangePassword);
         return insertEvent.recordset;
     } catch (error) {
         return error.message;
@@ -195,7 +196,7 @@ const validatePasswordResultMail = async (usuario) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertEvent = await pool.request()
                             .input('usuario', sql.VarChar, usuario)                            
-                            .query(sqlQueries.eventValidatePassowordResulMail);
+                            .query(querys.eventValidatePassowordResulMail);
         return insertEvent.recordset[0];
     } catch (error) {
         return error.message;
@@ -207,8 +208,8 @@ const isValidado = async (Documento) => {
         const sqlQueries = await utils.loadSqlQueries('users');
         const insertEvent = await pool.request()
                             .input('Documento', sql.VarChar, Documento)                            
-                            .query(sqlQueries.isAfiliado);
-                            console.log(insertEvent);
+                            .query(querys.isAfiliado);
+                            // console.log(insertEvent);
         return insertEvent.recordset;
     } catch (error) {
         return error.message;

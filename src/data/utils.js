@@ -8,8 +8,8 @@ const loadSqlQueries = async (folderName) => {
     // route produccion
    // const filePath = join(`/var/www/html/servpublico.maisondesante.org.pe/src/data/events/`, folderName);
    //const filePath = path.basename('data/events/'+folderName);
-    const files = await fs.readdir(filePath);
-    const sqlFiles = files.filter(f => f.endsWith('.sql'));
+    const files = await fs.readdir(filePath); 
+    const sqlFiles = files.filter(f => f.endsWith('.sql')); 
     const queries = {}; 
     for (const sqlfile of sqlFiles) {
         const query = fs.readFileSync(join(filePath,  sqlfile), {encoding: "UTF-8"});

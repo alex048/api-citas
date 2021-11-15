@@ -1,1 +1,0 @@
-UPDATE CW_USUARIO SET enableChangePassword = 1 WHERE Persona=@persona;

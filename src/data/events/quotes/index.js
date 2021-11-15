@@ -1,6 +1,7 @@
 'use strict';
 const utils = require('../../utils');
 const config = require('../../../../database/config');
+const querys = require('./query');
 const sql = require('mssql');
 
 const getHistorialCitas = async(idPaciente) => {
@@ -10,7 +11,7 @@ const getHistorialCitas = async(idPaciente) => {
          const sqlQueries = await utils.loadSqlQueries('quotes');
          const event = await pool.request()
                              .input('idPaciente', sql.Int, idPaciente)
-                             .query(sqlQueries.eventListQuotes);
+                             .query(querys.eventListQuotes);
          return event.recordset;
      } catch (error) {
          return error.message;
@@ -24,7 +25,7 @@ const getHistorialCitas = async(idPaciente) => {
          const event = await pool.request()
                              .input('fechaActual', sql.VarChar, fecha)
                              .input('IdPaciente', sql.Int, idPaciente)
-                             .query(sqlQueries.eventBookedAppointments);
+                             .query(querys.eventBookedAppointments);
          return event.recordset;
      } catch (error) {
          return error.message;
@@ -40,7 +41,7 @@ const getHistorialCitas = async(idPaciente) => {
                             .input('idPaciente', sql.Int, data.idPaciente)
                             .input('fechaCita', sql.NVarChar, data.fechaCita)
                             .input('usuario', sql.NVarChar, data.usuario)
-                            .query(sqlQueries.eventAppointmentRegister);
+                            .query(querys.eventAppointmentRegister);
         return insertEvent.recordset[0];
     } catch (error) {
         return error.message;
@@ -53,7 +54,7 @@ const getMedicoCitaOne = async(idPaciente) => {
          const sqlQueries = await utils.loadSqlQueries('quotes');
          const event = await pool.request()
                              .input('idPaciente', sql.Int, idPaciente)
-                             .query(sqlQueries.eventDoctorCita);
+                             .query(querys.eventDoctorCita);
          return event.recordset[0];
      } catch (error) {
          return error.message;
@@ -67,7 +68,7 @@ const getMedicoCitaOne = async(idPaciente) => {
         const insertEvent = await pool.request()
                             .input('idCita', sql.Int, data.idCita)
                             .input('usuario', sql.NVarChar, data.usuario)
-                            .query(sqlQueries.eventDeleteQuotes);
+                            .query(querys.eventDeleteQuotes);
         return insertEvent.recordset;
     } catch (error) {
         return error.message;

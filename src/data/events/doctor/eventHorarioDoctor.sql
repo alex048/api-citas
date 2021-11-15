@@ -1,1 +1,0 @@
-exec SP_CMS_CITAS_LISTA_HORARIOS @idmedico, @idespecialidad, @fecha, '0001', @sucursal

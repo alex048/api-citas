@@ -1,6 +1,7 @@
 'use strict';
 const utils = require('../../utils');
 const config = require('../../../../database/config');
+const querys = require('./query');
 const sql = require('mssql');
 
 const getSpecialties = async(sucursal) => {
@@ -9,7 +10,7 @@ const getSpecialties = async(sucursal) => {
         const sqlQueries = await utils.loadSqlQueries('specialties');
         const event = await pool.request()
                             .input('sucursal', sql.NVarChar, sucursal)
-                            .query(sqlQueries.eventGetSpecialties);
+                            .query(querys.eventGetSpecialties);
         return event.recordset;
     } catch (error) {
         return error.message;

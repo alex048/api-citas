@@ -1,1 +1,0 @@
-SELECT [Clave],[Persona] FROM CW_USUARIO  WHERE Usuario =@username

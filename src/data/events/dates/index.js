@@ -1,16 +1,17 @@
 'use strict';
 const utils = require('../../utils');
 const config = require('../../../../database/config');
+const querys = require('./query');
 const sql = require('mssql');
 const getAllDateDoctors =  async(data) => {
     try {    
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('dates');
+        // const sqlQueries = await utils.loadSqlQueries('dates');
         const eventsList = await pool.request()
                             .input('idEspecialidad', sql.Int, data.idEspecialidad)
                             .input('periodo', sql.Int, data.periodo)
                             .input('sede', sql.VarChar, data.sede)
-                            .query(sqlQueries.datesForAllDoctos);
+                            .query(querys.datesForAllDoctos);
         return eventsList.recordset;
     } catch (error) {
         console.log(error.message);
@@ -19,13 +20,13 @@ const getAllDateDoctors =  async(data) => {
 const getOneDateDoctors = async(data) => {
     try {
         let pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('dates');
+        //const sqlQueries = await utils.loadSqlQueries('dates');
         const eventsList = await pool.request()
                             .input('idMedico', sql.Int, data.idMedico)
                             .input('idEspecialidad', sql.Int, data.idEspecialidad)
                             .input('periodo', sql.Int, data.periodo)
                             .input('sede', sql.VarChar, data.sede)
-                            .query(sqlQueries.datesForOneDoctors);
+                            .query(querys.datesForOneDoctors);
         return eventsList.recordset;
     } catch (error) {
         console.log(error.message);

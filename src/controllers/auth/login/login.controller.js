@@ -24,7 +24,7 @@ const login = async (req, res, next) => {
                 msg: 'Contraseña no válida'
             });
         }*/
-        // descifra contraseña
+        // descifra contraseña        
         const validPassword = await descifraPasswordData.decryptPassword(username,password)
         if (validPassword.status === 'False' ) {
             return res.status(400).json({

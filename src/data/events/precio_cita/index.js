@@ -1,6 +1,7 @@
 'use strict';
 const utils = require('../../utils');
 const config = require('../../../../database/config');
+const querys = require('./query');
 const sql = require('mssql');
 const getPrecioCita =  async(data) => {
     try {    
@@ -10,7 +11,7 @@ const getPrecioCita =  async(data) => {
                             .input('sede', sql.NVarChar, data.sede)
                             .input('tipoPaciente', sql.Int, data.tipoPaciente)
                             .input('idTipoPrograma', sql.Int, data.idTipoPrograma)
-                            .query(sqlQueries.eventPricioCitas);
+                            .query(querys.eventPricioCitas);
         return eventsList.recordset;
     } catch (error) {
         console.log(error.message);
