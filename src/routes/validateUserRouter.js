@@ -36,6 +36,9 @@ const dates= require('../controllers/dates/dates.controllers');
 const precio= require('../controllers/precio_cita/precioCita.controllers');
 //cobranza
 const cobrnaza= require('../controllers/cobranza/cobranza.controllers');
+//sitedss
+const siteds= require('../controllers/siteds/login/sited-login.comtrollers');
+
 //PORTAL WEB
 const cie10= require('../portal_controllers/cie10/cie10.Controllers');
 const horario= require('../portal_controllers/horario_medico/horario.controllers');
@@ -124,6 +127,10 @@ router.get('/dateone/:idMedico/:idEspecialidad/:sede',validarJWT,dates.getOneDat
 router.get('/price/:sede/:tipoPaciente/:idTipoPrograma',validarJWT,precio.getPrecioCita);
 //COBRANZA CITAS
 router.post('/cobranza',validarJWT,cobrnaza.cobranza);
+
+//siteds
+router.post('/loginsited',siteds.loginSiteds);
+
 //PORTAL WEB
 router.get('/cie10',cie10.getCIE10);
 router.get('/horario',horario.getHorarioM);
